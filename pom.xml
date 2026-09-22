@@ -14,6 +14,7 @@
     <properties>
 
         <!-- Generic properties -->
+         <jacoco-maven-plugin>0.8.6</jacoco-maven-plugin>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -80,7 +81,11 @@
         <docker.jib-maven-plugin.version>2.6.0</docker.jib-maven-plugin.version>
         <docker.image.prefix>springcommunity</docker.image.prefix>
 
-    </properties>
+    </properties
+             <properties>
+    <java.version>17</java.version>
+    <jacoco-maven-plugin>0.8.6</jacoco-maven-plugin>
+</properties>
 
     <dependencyManagement>
         <dependencies>
@@ -293,6 +298,27 @@
 
     <!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
     <build>
+
+             <plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>${jacoco-maven-plugin}</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+
+        <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
         <defaultGoal>install</defaultGoal>
         <finalName>petclinic</finalName>
         <resources>
